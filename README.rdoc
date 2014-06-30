@@ -29,7 +29,7 @@ Ensure there is a current_user helper available in your controllers and views:
 
 == Defining
 
-All the abilities are defined in config/initializers/abilities.rb by can and cannot method:
+All the abilities are defined in config/initializers/abilities.rb by can and cannot methods:
   Abilities.define do
     can :create, Post
     cannot :destroy, User unless admin?

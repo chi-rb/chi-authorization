@@ -14,9 +14,6 @@ module Abilities
     end
 
     def can?(actor, action, subject)
-      unless actor.is_a? Abilities::Capable
-        actor.class.send :include, Abilities::Capable
-      end
       if definitions = find(actor)
         if actions = definitions[find_class_name(subject)]
           if behavior = actions[action]
