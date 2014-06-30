@@ -1,0 +1,85 @@
+{<img src="https://badge.fury.io/rb/abilities.png" alt="Gem Version" />}[http://badge.fury.io/rb/abilities] {<img src="https://codeclimate.com/github/museways/abilities.png" />}[https://codeclimate.com/github/museways/abilities] {<img src="https://travis-ci.org/museways/abilities.png?branch=master" alt="Build Status" />}[https://travis-ci.org/museways/abilities]
+
+= Abilities
+
+Minimalistic cancan alternative for rails.
+
+= Install
+
+Put this line in your Gemfile:
+  gem 'abilities'
+
+Then bundle:
+  $ bundle
+
+= Configuration
+
+Generate the abilities initializer:
+  bundle exec rails g abilities:install
+
+Include the capable concern in the models you want to be capable:
+  class User < ActiveRecord::Base
+    include Abilities::Capable
+  end
+
+Ensure there is a current_user helper available in your controllers and views:
+  class ApplicationController < ActionController::Base
+    helper :current_user
+    def current_user
+      @current_user ||= User.find_by(id: session[:user_id])
+    end
+  end
+
+= Usage
+
+== Defining
+
+All the abilities are defined in config/initializers/abilities.rb by can and cannot method:
+  Abilities.define do
+    can :create, Post
+    cannot :destroy, User unless admin?
+    can :edit, Post do |post|
+      post.user == self
+    end
+  end
+
+NOTE: In the example above admin? and self reference the capable instance object.
+
+== Checking
+
+=== Controllers
+
+With the authorize! method an exception Abilities::AccessDenied is raised if authorization fails:
+  class PostsController < ApplicationController
+    def edit
+      @post = Post.find(params[:id])
+      authorize! :edit, @post
+    end
+  end
+
+You can use the can? and cannot? helpers if you want:
+  class UsersController < ApplicationController
+    def edit
+      @post = Post.find(params[:id])
+      if can? :edit, @post
+        @post.update post_params
+      else
+        # handle access denied
+      end
+    end
+  end
+
+=== Views
+
+The helpers can? and cannot? are available as well:
+  <% if can? :create, Post %>
+    <%= link_to new_post_path %>
+  <% end %>
+
+= Credits
+
+This gem is maintained and funded by museways[http://museways.com].
+
+= License
+
+It is free software, and may be redistributed under the terms specified in the MIT-LICENSE file.
