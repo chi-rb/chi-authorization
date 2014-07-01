@@ -38,7 +38,12 @@ All the abilities are defined in config/initializers/abilities.rb by can and can
     end
   end
 
-NOTE: In the example above admin? and self reference the capable instance object.
+== Loading
+
+If you want to load the abilities from the database you may do something like this:
+  permissions.each do |permission|
+    can premissions.action, permissions.subject
+  end
 
 == Checking
 

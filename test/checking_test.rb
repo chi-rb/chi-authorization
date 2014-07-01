@@ -13,8 +13,8 @@ class CheckingTest < ActiveSupport::TestCase
   end
 
   test "cannot definition" do
-    assert user.cannot?(:read, post)
-    assert !user.can?(:read, post)
+    assert user.cannot?('read', post)
+    assert !user.can?('read', post)
   end
 
   test "ability conditions" do
