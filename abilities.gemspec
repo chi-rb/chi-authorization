@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ['hello@museways.com']
   s.homepage    = 'https://github.com/museways/abilities'
   s.summary     = 'Abilities for rails.'
-  s.description = 'Minimalistic cancan alternative for rails.'
+  s.description = 'Minimalistic authorization inspired in cancan for rails.'
   s.license     = 'MIT'
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']

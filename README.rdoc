@@ -2,7 +2,7 @@
 
 = Abilities
 
-Minimalistic cancan alternative for rails.
+Minimalistic authorization inspired in cancan for rails.
 
 = Install
 
