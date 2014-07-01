@@ -25,6 +25,8 @@ Ensure there is a current_user helper available in your controllers and views:
     end
   end
 
+NOTE: The gem will look for a User model and insert Abilities::Concern into it.
+
 = Usage
 
 == Defining
