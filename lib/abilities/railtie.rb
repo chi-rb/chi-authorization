@@ -4,7 +4,7 @@ module Abilities
     initializer 'abilites' do
       User rescue {}
       if defined? User
-        User.send :include, Abilities::Capable
+        User.send :include, Abilities::Concern
       end
       ::ActionView::Base.send :include, Abilities::ActionView::Base
       ::ActionController::Base.send :include, Abilities::ActionController::Base

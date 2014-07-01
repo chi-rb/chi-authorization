@@ -1,5 +1,5 @@
 module Abilities
-  module Capable
+  module Concern
     extend ActiveSupport::Concern
 
     %w(can? cannot?).each do |name|

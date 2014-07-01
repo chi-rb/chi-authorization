@@ -1,15 +1,10 @@
 module Abilities
   class Proxy
 
-    def initialize(actor, &block)
+    def initialize(actor, definitions, &block)
       @actor = actor
-      @block = block
-      @definitions = Definitions.new
-    end
-
-    def load
-      instance_eval &@block
-      @definitions.all
+      @definitions = definitions
+      instance_eval &block
     end
 
     def can(actions, subjects, &block)
