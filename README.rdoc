@@ -38,10 +38,6 @@ All the abilities are defined in config/initializers/abilities.rb by can and can
     end
   end
 
-NOTE: The admin and self methods reference the current_user.
-
-== Loading
-
 If you want to load the abilities from the database you may do something like this:
   Abilities.define do
     permissions.each do |permission|
@@ -49,7 +45,7 @@ If you want to load the abilities from the database you may do something like th
     end
   end
 
-NOTE: The permissions method reference the current_user.
+NOTE: Any method besides can and cannot references the current_user.
 
 == Checking
 
