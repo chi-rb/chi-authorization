@@ -38,12 +38,18 @@ All the abilities are defined in config/initializers/abilities.rb by can and can
     end
   end
 
+NOTE: The admin and self methods reference the current_user.
+
 == Loading
 
 If you want to load the abilities from the database you may do something like this:
-  permissions.each do |permission|
-    can premissions.action, permissions.subject
+  Abilities.define do
+    permissions.each do |permission|
+      can premissions.action, permissions.subject
+    end
   end
+
+NOTE: The permissions method reference the current_user.
 
 == Checking
 
@@ -71,7 +77,7 @@ If you don't want an exception to be raised use can? and cannot? helpers:
 
 === Views
 
-The helpers can? and cannot? are available:
+The helpers can? and cannot? are available here too:
   <% if can? :create, Post %>
     <%= link_to new_post_path %>
   <% end %>
