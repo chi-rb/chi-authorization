@@ -11,14 +11,17 @@ module Abilities
       subjects = [subjects] unless subjects.is_a? Array
       subjects.each do |subject|
         actions.each do |action|
-          (all[find_subject_class(subject)] ||= {})[action.to_s] = block_given? ? block : behavior
+          (all[find_subject_id(subject)] ||= {})[action.to_s] = block_given? ? block : behavior
         end
       end
     end
 
     def can?(action, subject)
-      if actions = all[find_subject_class(subject)]
-        if behavior = actions[action.to_s]
+      subject_id = find_subject_id(subject)
+      if subject_id != 'all' and can?(action, 'all')
+        true
+      elsif actions = all[subject_id]
+        if behavior = (actions[action.to_s] || actions['manage'])
           if behavior.is_a? Proc
             @actor.instance_exec subject, &behavior
           else
@@ -42,8 +45,10 @@ module Abilities
       @all ||= {}
     end
 
-    def find_subject_class(subject)
-      if subject.is_a? Class
+    def find_subject_id(subject)
+      if subject.to_s == 'all'
+        subject.to_s
+      elsif subject.is_a? Class
         subject.name
       else
         subject.class.name

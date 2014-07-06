@@ -23,7 +23,19 @@ class CheckingTest < ActiveSupport::TestCase
   end
 
   test "ability block" do
-    assert user.can?(:update, post_with_user)
+    assert user.can?(:edit, post_with_user)
+  end
+
+  test "manage action" do
+    assert user.can?(:create, User)
+    assert user.can?(:read, user)
+    assert user.can?(:edit, user)
+    assert user.can?(:destroy, user)
+  end
+
+  test "all subject" do
+    assert user.can?(:touch, post)
+    assert user.can?(:touch, user)
   end
 
   test "undefined definition" do
