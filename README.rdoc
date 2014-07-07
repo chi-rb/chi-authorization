@@ -38,7 +38,7 @@ All the abilities are defined in config/initializers/abilities.rb by can and can
     can :edit, Post do |post|
       post.user == self
     end
-    can :manage, :user
+    can :manage, User
     can :touch, :all
   end
 
