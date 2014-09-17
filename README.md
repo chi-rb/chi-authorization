@@ -94,7 +94,7 @@ end
 #### Views
 
 The helpers can? and cannot? are available here too:
-```ruby
+```erb
 <% if can? :create, Post %>
   <%= link_to new_post_path %>
 <% end %>
