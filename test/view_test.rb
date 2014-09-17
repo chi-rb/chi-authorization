@@ -2,11 +2,11 @@ require 'test_helper'
 
 class ViewTest < ActionView::TestCase
 
-  test "can helper" do
+  test 'can helper' do
     assert can?(:create, post)
   end
 
-  test "cannot helper" do
+  test 'cannot helper' do
     assert cannot?(:read, post)
   end
 

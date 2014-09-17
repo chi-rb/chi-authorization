@@ -2,15 +2,15 @@ require 'test_helper'
 
 class ControllerTest < ActiveSupport::TestCase
 
-  test "can helper" do
+  test 'can helper' do
     assert controller.send(:can?, :create, post)
   end
 
-  test "cannot helper" do
+  test 'cannot helper' do
     assert controller.send(:cannot?, :read, post)
   end
 
-  test "authorize helper" do
+  test 'authorize helper' do
     assert_nothing_raised do
       controller.send :authorize!, :create, post
     end
