@@ -15,6 +15,14 @@ module Abilities
         raise Abilities::AccessDenied unless can? action, subject
       end
 
+      class << self
+
+        def authorize_resource(*args)
+          options = args.extract_options!
+
+        end
+
+      end
     end
   end
 end
