@@ -1,4 +1,4 @@
-[![Gem Version](https://badge.fury.io/rb/abilities.svg)](http://badge.fury.io/rb/abilities) [![Code Climate](https://codeclimate.com/github/museways/abilities/badges/gpa.svg)](https://codeclimate.com/github/museways/abilities) [![Build Status](https://travis-ci.org/museways/abilities.svg?branch=master)](https://travis-ci.org/museways/abilities)
+[![Gem Version](https://badge.fury.io/rb/abilities.svg)](http://badge.fury.io/rb/abilities) [![Code Climate](https://codeclimate.com/github/museways/abilities/badges/gpa.svg)](https://codeclimate.com/github/museways/abilities) [![Build Status](https://travis-ci.org/museways/abilities.svg?branch=master)](https://travis-ci.org/museways/abilities) [![Dependency Status](https://gemnasium.com/museways/abilities.svg)](https://gemnasium.com/museways/abilities)
 
 # Abilities
 
