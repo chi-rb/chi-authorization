@@ -18,7 +18,7 @@ $ bundle
 
 ## Configuration
 
-Generate the abilities initializer:
+Generate the abilities configuration file:
 ```
 bundle exec rails g abilities:install
 ```
@@ -44,7 +44,7 @@ end
 
 ### Defining
 
-All the abilities are defined in config/initializers/abilities.rb by can and cannot methods:
+All the abilities are defined in config/abilities.rb by can and cannot methods:
 ```ruby
 Abilities.define do
   can :create, Post
