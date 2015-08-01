@@ -49,8 +49,8 @@ All the abilities are defined in config/initializers/abilities.rb by can and can
 Abilities.define do
   can :create, Post
   cannot :destroy, User unless admin?
-  can :edit, Post do |post|
-    post.user == self
+  can :edit, Post do |subject|
+    subject.user == self
   end
   can :manage, User
   can :touch, :all
