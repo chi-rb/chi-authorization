@@ -7,7 +7,7 @@ module Abilities
     end
 
     config.after_initialize do
-      require Rails.root.join('config/abilities.rb')
+      load Rails.root.join('config/abilities.rb')
     end
 
   end
