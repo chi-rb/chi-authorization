@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    abilities (0.0.4)
+    abilities (0.1.0)
       rails (>= 4.0.0, < 4.3.0)
 
 GEM

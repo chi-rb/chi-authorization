@@ -33,7 +33,12 @@ class ApplicationController < ActionController::Base
 end
 ```
 
-NOTE: The gem will look for a User model and include Abilities::Concern into it.
+Add the abilities concern to the model:
+```ruby
+class User < ActiveRecord::Base
+  include Abilities::Concern
+end
+```
 
 ## Usage
 
