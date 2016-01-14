@@ -7,9 +7,9 @@ require 'abilities/version'
 Gem::Specification.new do |s|
   s.name        = 'abilities'
   s.version     = Abilities::VERSION
-  s.authors     = ['Museways']
-  s.email       = ['hello@museways.com']
-  s.homepage    = 'https://github.com/museways/abilities'
+  s.authors     = ['mmontossi']
+  s.email       = ['mmontossi@buyin.io']
+  s.homepage    = 'https://github.com/mmontossi/abilities'
   s.summary     = 'Abilities for rails.'
   s.description = 'Minimalistic authorization inspired in cancan for rails.'
   s.license     = 'MIT'
