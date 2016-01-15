@@ -1,5 +1,6 @@
 [![Gem Version](https://badge.fury.io/rb/abilities.svg)](http://badge.fury.io/rb/abilities)
-[![Code Climate](https://codeclimate.com/github/mmontossi/abilities/badges/gpa.svg)](https://codeclimate.com/github/mmontossi/abilities) [![Build Status](https://travis-ci.org/mmontossi/abilities.svg)](https://travis-ci.org/mmontossi/abilities)
+[![Code Climate](https://codeclimate.com/github/mmontossi/abilities/badges/gpa.svg)](https://codeclimate.com/github/mmontossi/abilities)
+[![Build Status](https://travis-ci.org/mmontossi/abilities.svg)](https://travis-ci.org/mmontossi/abilities)
 [![Dependency Status](https://gemnasium.com/mmontossi/abilities.svg)](https://gemnasium.com/mmontossi/abilities)
 
 # Abilities
