@@ -7,7 +7,7 @@ module Abilities
 
       %w(can? cannot?).each do |name|
         define_method name do |action, subject|
-          Abilities.send name, current_user, action, subject
+          Abilities.send name, instance_exec(&Abilities.configuration.fetcher), action, subject
         end
       end
 

@@ -26,17 +26,16 @@ Generate the abilities configuration file:
 bundle exec rails g abilities:install
 ```
 
-Ensure there is a current_user helper available in your controllers and views:
+Define the user fetcher for your controllers and views:
 ```ruby
-class ApplicationController < ActionController::Base
-  helper :current_user
-  def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
+Abilities.configure do |config|
+  config.fetcher do
+    current_user
   end
 end
 ```
 
-Add the abilities concern to the model:
+Add the abilities concern to the model if you want to call can? and cannot? in the user instance:
 ```ruby
 class User < ActiveRecord::Base
   include Abilities::Concern
@@ -69,7 +68,7 @@ Abilities.define do
 end
 ```
 
-NOTE: Any method besides can and cannot references the current_user.
+NOTE: Any method besides can and cannot references the user instance.
 
 ### Checking
 
