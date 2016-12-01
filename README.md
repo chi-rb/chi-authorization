@@ -26,7 +26,7 @@ Generate the definitions file:
 bundle exec rails g abilities:install
 ```
 
-Ensure there is a current_user method to your controllers:
+Ensure there is a current_user method in your controllers:
 ```ruby
 class ApplicationController < ActionController::Base
   def current_user
@@ -37,7 +37,7 @@ end
 
 ## Usage
 
-### Defining
+### Definitions
 
 Use can and cannot methods to define the policies:
 ```ruby
@@ -50,9 +50,9 @@ Abilities.define do
 end
 ```
 
-NOTE: Any method besides can and cannot is sent to the current_user.
+NOTE: Methods besides can and cannot are sent to the current_user.
 
-#### Controllers
+### Controllers
 
 With the authorize! method Abilities::AccessDenied is raised if authorization fails:
 ```ruby
@@ -72,13 +72,13 @@ class UsersController < ApplicationController
     if can?(:edit, @user)
       @user.update post_params
     else
-      # handle access denied
+      # Handle access denied
     end
   end
 end
 ```
 
-#### Views
+### Views
 
 The helpers can? and cannot? are available here too:
 ```erb
