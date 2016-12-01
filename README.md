@@ -72,7 +72,7 @@ class UsersController < ApplicationController
     if can?(:edit, @user)
       @user.update post_params
     else
-      # Handle access denied
+      # handle access denied
     end
   end
 end
