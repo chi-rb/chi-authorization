@@ -30,10 +30,7 @@ Ensure there is a current_user method to your controllers:
 ```ruby
 class ApplicationController < ActionController::Base
   def current_user
-    @current_user ||= begin
-      id = (cookies[:user_id] || session[:user_id])
-      User.find_by(id: id) || User.new
-    end
+    @current_user ||= User.find(session[:user_id])
   end
 end
 ```
@@ -45,6 +42,7 @@ end
 Use can and cannot methods to define the policies:
 ```ruby
 Abilities.define do
+  can :view, :any
   can :manage, User do |user|
     user == self
   end
@@ -71,7 +69,7 @@ If you don't want an exception to be raised use can? and cannot? helpers:
 class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
-    if can? :edit, @user
+    if can?(:edit, @user)
       @user.update post_params
     else
       # handle access denied
@@ -84,8 +82,8 @@ end
 
 The helpers can? and cannot? are available here too:
 ```erb
-<% if can? :create, Product %>
-  <%= link_to new_product_path %>
+<% if can?(:detroy, @product) %>
+  <%= link_to product_path(@product), method: 'delete' %>
 <% end %>
 ```
 
