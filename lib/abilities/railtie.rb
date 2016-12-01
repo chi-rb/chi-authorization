@@ -1,12 +1,10 @@
 module Abilities
   class Railtie < Rails::Railtie
 
-    initializer 'abilites' do
-      ::ActionView::Base.send :include, Abilities::ActionView::Base
-      ::ActionController::Base.send :include, Abilities::ActionController::Base
-    end
-
-    config.after_initialize do
+    initializer :abilites do
+      ::ActionController::Base.include(
+        Abilities::Extensions::ActionController::Base
+      )
       load Rails.root.join('config/abilities.rb')
     end
 

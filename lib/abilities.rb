@@ -1,33 +1,24 @@
-require 'abilities/action_controller/base'
-require 'abilities/action_view/base'
-require 'abilities/proxy'
-require 'abilities/configuration'
+require 'abilities/extensions/action_controller/base'
 require 'abilities/definitions'
 require 'abilities/exceptions'
-require 'abilities/concern'
+require 'abilities/proxy'
 require 'abilities/railtie'
+require 'abilities/version'
 
 module Abilities
   class << self
 
-    def configure
-      yield configuration
-    end
-
-    def configuration
-      @configuration ||= Configuration.new
-    end
+    attr_reader :block
 
     def define(&block)
       @block = block
     end
 
-    def can?(actor, action, subject)
-      Definitions.new(actor, &@block).can?(action, subject)
-    end
-
-    def cannot?(*args)
-      !can?(*args)
+    %i(can? cannot?).each do |name|
+      define_method name do |user, action, resource|
+        definitions = Definitions.new(user, &block)
+        definitions.send name, action, resource
+      end
     end
 
   end

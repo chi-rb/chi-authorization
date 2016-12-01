@@ -1,2 +1,0 @@
-Abilities.define do
-end

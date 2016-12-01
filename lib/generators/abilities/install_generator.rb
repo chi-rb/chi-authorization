@@ -5,8 +5,8 @@ module Abilities
 
     source_root File.expand_path('../templates', __FILE__)
 
-    def create_capable_concern
-      copy_file 'abilities.rb', 'config/abilities.rb'
+    def create_configuration_file
+      copy_file 'configuration.rb', 'config/abilities.rb'
     end
 
   end

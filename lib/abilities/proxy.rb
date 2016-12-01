@@ -1,22 +1,21 @@
 module Abilities
   class Proxy
 
-    def initialize(actor, definitions, &block)
-      @actor = actor
+    def initialize(definitions, &block)
       @definitions = definitions
       instance_eval &block
     end
 
-    def can(actions, subjects, &block)
-      @definitions.add actions, subjects, true, &block
+    def can(actions, resources, &block)
+      @definitions.add actions, resources, (block_given? ? block : true)
     end
 
-    def cannot(actions, subjects, &block)
-      @definitions.add actions, subjects, false, &block
+    def cannot(actions, resources, &block)
+      @definitions.add actions, resources, (block_given? ? block : false)
     end
 
     def method_missing(name, *args, &block)
-      @actor.send name, *args, &block
+      @definitions.user.send name, *args, &block
     end
 
   end

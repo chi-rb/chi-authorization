@@ -1,10 +1,9 @@
 Abilities.define do
-  can :create, Post
-  cannot :read, Post
-  can 'destroy', Post.new if admin?
-  can :edit, Post do |subject|
-    subject.user == self
+  can :touch, :any
+  can :manage, User do |user|
+    user == self
   end
-  can :manage, User
-  can :touch, :all
+  can :create, [Product, User]
+  can %i(view list), Product
+  cannot :detroy, Product unless admin?
 end

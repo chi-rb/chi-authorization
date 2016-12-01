@@ -21,24 +21,20 @@ $ bundle
 
 ## Configuration
 
-Generate the abilities configuration file:
+Generate the definitions file:
 ```
 bundle exec rails g abilities:install
 ```
 
-Define the user fetcher for your controllers and views:
+Ensure there is a current_user method to your controllers:
 ```ruby
-Abilities.configure do |config|
-  config.fetcher do
-    current_user
+class ApplicationController < ActionController::Base
+  def current_user
+    @current_user ||= begin
+      id = (cookies[:user_id] || session[:user_id])
+      User.find_by(id: id) || User.new
+    end
   end
-end
-```
-
-Add the abilities concern to the model if you want to call can? and cannot? in the user instance:
-```ruby
-class User < ActiveRecord::Base
-  include Abilities::Concern
 end
 ```
 
@@ -46,40 +42,26 @@ end
 
 ### Defining
 
-All the abilities are defined in config/abilities.rb by can and cannot methods:
+Use can and cannot methods to define the policies:
 ```ruby
 Abilities.define do
-  can :create, Post
-  cannot :destroy, User unless admin?
-  can :edit, Post do |subject|
-    subject.user == self
+  can :manage, User do |user|
+    user == self
   end
-  can :manage, User
-  can :touch, :all
+  cannot :detroy, Product if admin?
 end
 ```
 
-If you want to load the abilities from the database you may do something like this:
-```ruby
-Abilities.define do
-  permissions.each do |permission|
-    can premissions.action, permissions.subject
-  end
-end
-```
-
-NOTE: Any method besides can and cannot references the user instance.
-
-### Checking
+NOTE: Any method besides can and cannot is sent to the current_user.
 
 #### Controllers
 
 With the authorize! method Abilities::AccessDenied is raised if authorization fails:
 ```ruby
-class PostsController < ApplicationController
+class UsersController < ApplicationController
   def edit
-    @post = Post.find(params[:id])
-    authorize! :edit, @post
+    @user = User.find(params[:id])
+    authorize! :edit, @user
   end
 end
 ```
@@ -88,9 +70,9 @@ If you don't want an exception to be raised use can? and cannot? helpers:
 ```ruby
 class UsersController < ApplicationController
   def edit
-    @post = Post.find(params[:id])
-    if can? :edit, @post
-      @post.update post_params
+    @user = User.find(params[:id])
+    if can? :edit, @user
+      @user.update post_params
     else
       # handle access denied
     end
@@ -102,8 +84,8 @@ end
 
 The helpers can? and cannot? are available here too:
 ```erb
-<% if can? :create, Post %>
-  <%= link_to new_post_path %>
+<% if can? :create, Product %>
+  <%= link_to new_product_path %>
 <% end %>
 ```
 

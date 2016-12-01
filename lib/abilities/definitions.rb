@@ -1,31 +1,23 @@
 module Abilities
   class Definitions
 
-    def initialize(actor, &block)
-      @actor = actor
-      Proxy.new(actor, self, &block)
+    attr_reader :user
+
+    def initialize(user, &block)
+      @user = user
+      Proxy.new self, &block
     end
 
-    def add(actions, subjects, behavior, &block)
-      actions = [actions] unless actions.is_a? Array
-      subjects = [subjects] unless subjects.is_a? Array
-      subjects.each do |subject|
-        actions.each do |action|
-          (all[find_subject_id(subject)] ||= {})[action.to_s] = block_given? ? block : behavior
-        end
-      end
-    end
-
-    def can?(action, subject)
-      subject_id = find_subject_id(subject)
-      if subject_id != 'all' and can?(action, 'all')
+    def can?(action, resource)
+      id = resource_id(resource)
+      if id != :any && can?(action, :any)
         true
-      elsif actions = all[subject_id]
-        if behavior = (actions[action.to_s] || actions['manage'])
-          if behavior.is_a? Proc
-            @actor.instance_exec subject, &behavior
+      elsif actions = registry[id]
+        if policy = (actions[action] || actions[:manage])
+          if policy.is_a?(Proc)
+            user.instance_exec resource, &policy
           else
-            behavior
+            policy
           end
         else
           false
@@ -39,19 +31,36 @@ module Abilities
       !can?(*args)
     end
 
-    protected
-
-    def all
-      @all ||= {}
+    def add(actions, resources, policy)
+      unless actions.is_a?(Array)
+        actions = [actions]
+      end
+      unless resources.is_a?(Array)
+        resources = [resources]
+      end
+      resources.each do |resource|
+        actions.each do |action|
+          id = resource_id(resource)
+          registry[id] ||= {}
+          registry[id][action] = policy
+        end
+      end
     end
 
-    def find_subject_id(subject)
-      if subject.to_s == 'all'
-        subject.to_s
-      elsif subject.is_a? Class
-        subject.name
+    private
+
+    def registry
+      @registry ||= {}
+    end
+
+    def resource_id(resource)
+      case resource
+      when :any
+        resource
+      when Class
+        resource.name.underscore.to_sym
       else
-        subject.class.name
+        resource.class.name.underscore.to_sym
       end
     end
 
