@@ -53,7 +53,7 @@ Abilities.define do
   can :manage, User do |user|
     user == self
   end
-  cannot :detroy, Product if admin?
+  can :detroy, Product if admin?
 end
 ```
 
