@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ['mmontossi@gmail.com']
   s.homepage    = 'https://github.com/mmontossi/abilities'
   s.summary     = 'Abilities for rails.'
-  s.description = 'A simpler alternative to cancan gem in rails.'
+  s.description = 'Authorization dsl to manage permissions in rails.'
   s.license     = 'MIT'
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
