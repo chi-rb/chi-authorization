@@ -5,7 +5,15 @@
 
 # Abilities
 
-Minimalistic authorization inspired in cancan for rails.
+A simpler alternative to cancan gem in rails.
+
+## Why
+
+I did this gem to:
+
+- Keep an up to date alternative of the famous cancan.
+- Use a dsl instead of a plain class to simplify the syntax.
+- Limit authorizations to only controllers and their views.
 
 ## Install
 
