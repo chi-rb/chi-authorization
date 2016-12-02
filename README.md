@@ -88,7 +88,7 @@ end
 
 ### Views
 
-The helpers can? and cannot? are available here too:
+The helpers can? and cannot? are available in the controller views too:
 ```erb
 <% if can?(:detroy, @product) %>
   <%= link_to product_path(@product), method: 'delete' %>
