@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AbilitiesTest < ActiveSupport::TestCase
+class PolicyTest < ActiveSupport::TestCase
 
   setup do
     @user = User.new

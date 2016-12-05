@@ -1,6 +1,6 @@
 require 'test_helper'
 require 'rails/generators'
-require 'generators/abilities/install_generator'
+require 'generators/abilities/install/install_generator'
 
 class GeneratorsTest < Rails::Generators::TestCase
   destination Rails.root.join('tmp')
@@ -10,7 +10,7 @@ class GeneratorsTest < Rails::Generators::TestCase
   end
 
   test 'install' do
-    self.class.tests Abilities::InstallGenerator
+    self.class.tests Abilities::Generators::InstallGenerator
     run_generator
     assert_file 'config/abilities.rb'
   end
