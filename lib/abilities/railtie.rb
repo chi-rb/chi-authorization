@@ -1,14 +1,16 @@
 module Abilities
   class Railtie < Rails::Railtie
 
-    initializer 'abilites.extensions' do
-      ::ActionController::Base.include(
-        Abilities::Extensions::ActionController::Base
-      )
+    config.before_initialize do
+      load Rails.root.join('config/abilities.rb')
     end
 
-    config.after_initialize do
-      load Rails.root.join('config/abilities.rb')
+    initializer 'abilites.action_controller' do
+      ActiveSupport.on_load :action_controller do
+        ::ActionController::Base.include(
+          Abilities::Extensions::ActionController::Base
+        )
+      end
     end
 
   end
