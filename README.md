@@ -94,6 +94,11 @@ The helpers can? and cannot? are available in the controller views too:
 <% end %>
 ```
 
+## Contributing
+
+Any issue, pull request, comment of any kind is more than welcome, but please be aware I mainly use PostgreSQL, AWS,
+Redis, Elasticsearch, FreeBSD and Memcached, so to support anything outside that stack a co-maintainer would be needed.
+
 ## Credits
 
 This gem is maintained and funded by [mmontossi](https://github.com/mmontossi).
