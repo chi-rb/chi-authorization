@@ -6,7 +6,7 @@ before_install:
   - mv Gemfile.travis Gemfile
 script:
   - cd test/dummy && bundle exec rake db:create db:migrate
-  - bundle exec rake test
+  - cd ../.. && bundle exec rake test
 env:
   - RAILS=5.1.0
 rvm:
