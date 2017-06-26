@@ -3,7 +3,7 @@ module Abilities
 
     def initialize(definitions, &block)
       @definitions = definitions
-      instance_eval &block
+      instance_eval(&block)
     end
 
     def can(actions, resources, &block)

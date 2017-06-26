@@ -7,7 +7,7 @@ script:
   - cd test/dummy && bundle exec rake db:create db:migrate
   - bundle exec rake test
 env:
-  - RAILS=5.0.0
+  - RAILS=5.1.0
 rvm:
   - 2.2.2
   - 2.3.0
