@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     abilities (5.1.0)
-      rails (~> 5.1.0)
+      rails (~> 5.1)
 
 GEM
   remote: https://rubygems.org/
@@ -112,7 +112,7 @@ PLATFORMS
 
 DEPENDENCIES
   abilities!
-  pg (~> 0.21.0)
+  pg (~> 0.21)
 
 BUNDLED WITH
    1.15.1
