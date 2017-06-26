@@ -9,7 +9,7 @@ module Abilities
     end
 
     def can?(action, resource)
-      id = resource_id(resource)
+      id = normalize_id(resource)
       if id != :any && can?(action, :any)
         true
       elsif actions = registry[id]
@@ -40,7 +40,7 @@ module Abilities
       end
       resources.each do |resource|
         actions.each do |action|
-          id = resource_id(resource)
+          id = normalize_id(resource)
           registry[id] ||= {}
           registry[id][action] = policy
         end
@@ -53,7 +53,7 @@ module Abilities
       @registry ||= {}
     end
 
-    def resource_id(resource)
+    def normalize_id(resource)
       case resource
       when :any
         resource

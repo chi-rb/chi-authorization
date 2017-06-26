@@ -16,8 +16,7 @@ module Abilities
 
     %i(can? cannot?).each do |name|
       define_method name do |user, action, resource|
-        definitions = Definitions.new(user, &block)
-        definitions.send name, action, resource
+        Definitions.new(user, &block).send name, action, resource
       end
     end
 
