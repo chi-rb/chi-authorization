@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.name        = 'abilities'
   s.version     = Abilities::VERSION
   s.authors     = ['mmontossi']
-  s.email       = ['mmontossi@museways.com']
-  s.homepage    = 'https://github.com/mmontossi/abilities'
+  s.email       = ['hi@museways.com']
+  s.homepage    = 'https://github.com/museways/abilities'
   s.summary     = 'Abilities for rails.'
   s.description = 'Authorization dsl to manage permissions in rails.'
   s.license     = 'MIT'
