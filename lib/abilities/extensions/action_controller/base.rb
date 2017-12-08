@@ -10,7 +10,8 @@ module Abilities
 
         %w(can? cannot?).each do |name|
           define_method name do |action, resource|
-            Abilities.send name, current_user, action, resource
+            user = send(Abilities.configuration.helper_name)
+            Abilities.send name, user, action, resource
           end
         end
 

@@ -1,4 +1,5 @@
 require 'abilities/extensions/action_controller/base'
+require 'abilities/configuration'
 require 'abilities/definitions'
 require 'abilities/exceptions'
 require 'abilities/proxy'
@@ -10,8 +11,16 @@ module Abilities
 
     attr_reader :block
 
+    def configuration
+      @configuration ||= Configuration.new
+    end
+
     def define(&block)
       @block = block
+    end
+
+    def configure
+      yield configuration
     end
 
     %i(can? cannot?).each do |name|
