@@ -5,7 +5,7 @@ class PolicyTest < ActiveSupport::TestCase
   setup do
     @user = User.new
     @controller = ProductsController.new
-    @controller.current_user = @user
+    @controller.user = @user
     @product = Product.new
   end
 

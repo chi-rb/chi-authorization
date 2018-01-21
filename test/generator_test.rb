@@ -12,6 +12,7 @@ class GeneratorsTest < Rails::Generators::TestCase
   test 'install' do
     self.class.tests Abilities::Generators::InstallGenerator
     run_generator
+    assert_file 'config/initializers/abilities.rb'
     assert_file 'config/abilities.rb'
   end
 

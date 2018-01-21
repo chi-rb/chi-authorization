@@ -9,7 +9,7 @@ Authorization dsl to manage permissions in rails.
 
 ## Why
 
-I did this gem to:
+We did this gem to:
 
 - Use a dsl instead of a plain class to simplify the syntax.
 - Limit authorizations to only controllers and their views.
@@ -33,12 +33,10 @@ Generate the definitions file:
 bundle exec rails g abilities:install
 ```
 
-Ensure there is a current_user method in your controllers:
+Set the user helper name to use in the controllers in the abilities.rb initializer:
 ```ruby
-class ApplicationController < ActionController::Base
-  def current_user
-    @current_user ||= User.find(session[:user_id])
-  end
+Abilities.configure do |config|
+  config.helper = :user
 end
 ```
 
@@ -98,7 +96,7 @@ The helpers can? and cannot? are available in the controller views too:
 
 Any issue, pull request, comment of any kind is more than welcome!
 
-I will mainly ensure compatibility to Rails, AWS, PostgreSQL, Redis, Elasticsearch and FreeBSD.
+We will mainly ensure compatibility to Rails, AWS, PostgreSQL, Redis, Elasticsearch and FreeBSD.
 
 ## Credits
 
