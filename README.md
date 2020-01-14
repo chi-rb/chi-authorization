@@ -5,19 +5,19 @@
 
 # Abilities
 
-Authorization dsl to manage permissions in rails.
+Authorization DSL to manage permissions in Ruby on Rails.
 
 ## Why
 
 We did this gem to:
 
-- Use a dsl instead of a plain class to simplify the syntax.
+- Use a DSL instead of a plain class to simplify the syntax.
 - Limit authorizations to only controllers and their views.
 
 ## Install
 
-Put this line in your Gemfile:
-```ruby
+Add this line in your Gemfile:
+```
 gem 'abilities'
 ```
 
@@ -29,8 +29,15 @@ $ bundle
 ## Configuration
 
 Generate the definitions file:
-```
+```ruby
 bundle exec rails g abilities:install
+```
+
+This will create two files.
+
+```ruby
+config/initializers/abilities.rb
+config/abilities.rb
 ```
 
 Set the user helper name to use in the controllers in the abilities.rb initializer:
