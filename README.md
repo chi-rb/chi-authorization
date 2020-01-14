@@ -40,7 +40,7 @@ config/initializers/abilities.rb
 config/abilities.rb
 ```
 
-Within config/initializers/abilities.rb set the user helper name that will be used in the controllers, in this case the user model:
+Within config/initializers/abilities.rb set the user helper name that will be used in the controllers, in this case the user model: 
 ```ruby
 Abilities.configure do |config|
   config.helper = :user
