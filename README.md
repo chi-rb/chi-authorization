@@ -5,19 +5,19 @@
 
 # Abilities
 
-Authorization dsl to manage permissions in rails.
+Authorization DSL to manage permissions in Ruby on Rails.
 
 ## Why
 
 We did this gem to:
 
-- Use a dsl instead of a plain class to simplify the syntax.
+- Use a DSL instead of a plain class to simplify the syntax.
 - Limit authorizations to only controllers and their views.
 
 ## Install
 
-Put this line in your Gemfile:
-```ruby
+Add this line in your Gemfile:
+```
 gem 'abilities'
 ```
 
@@ -29,11 +29,18 @@ $ bundle
 ## Configuration
 
 Generate the definitions file:
-```
+```ruby
 bundle exec rails g abilities:install
 ```
 
-Set the user helper name to use in the controllers in the abilities.rb initializer:
+This will create two files.
+
+```ruby
+config/initializers/abilities.rb
+config/abilities.rb
+```
+
+Within config/initializers/abilities.rb set the user helper name that will be used in the controllers, in this case the user model:
 ```ruby
 Abilities.configure do |config|
   config.helper = :user
@@ -44,14 +51,14 @@ end
 
 ### Definitions
 
-Use can and cannot methods to define the policies:
+The can and cannot methods are used to define the policies:
 ```ruby
 Abilities.define do
   can :view, :any
   can :manage, User do |user|
     user == self
   end
-  can :detroy, Product if admin?
+  can :destroy, Product if admin?
 end
 ```
 
@@ -69,7 +76,7 @@ class UsersController < ApplicationController
 end
 ```
 
-If you don't want an exception to be raised use can? and cannot? helpers:
+If you don't wish an exception to be raised, you may use the can? and cannot? helpers:
 ```ruby
 class UsersController < ApplicationController
   def edit
@@ -85,9 +92,9 @@ end
 
 ### Views
 
-The helpers can? and cannot? are available in the controller views too:
+The helpers can? and cannot? are available in views as well:
 ```erb
-<% if can?(:detroy, @product) %>
+<% if can?(:destroy, @product) %>
   <%= link_to product_path(@product), method: 'delete' %>
 <% end %>
 ```
