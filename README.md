@@ -1,24 +1,23 @@
-[![Gem Version](https://badge.fury.io/rb/abilities.svg)](http://badge.fury.io/rb/abilities)
-[![Code Climate](https://codeclimate.com/github/museways/abilities/badges/gpa.svg)](https://codeclimate.com/github/museways/abilities)
-[![Build Status](https://travis-ci.org/museways/abilities.svg)](https://travis-ci.org/museways/abilities)
-[![Dependency Status](https://gemnasium.com/museways/abilities.svg)](https://gemnasium.com/museways/abilities)
+[![Gem Version](https://badge.fury.io/rb/chi-authorization.svg)](http://badge.fury.io/rb/chi-authorization)
+[![Code Climate](https://codeclimate.com/github/chi-rb/chi-authorization/badges/gpa.svg)](https://codeclimate.com/github/chi-rb/chi-authorization)
+[![Build Status](https://travis-ci.org/chi-rb/chi-authorization.svg)](https://travis-ci.org/chi-rb/chi-authorization)
 
-# Abilities
+# Authorization
 
-Authorization DSL to manage permissions in Ruby on Rails.
+DSL to manage user permissions in Rails.
 
 ## Why
 
-We did this gem to:
+I want to:
 
-- Use a DSL instead of a plain class to simplify the syntax.
+- Use a DSL instead of a plain class.
 - Limit authorizations to only controllers and their views.
 
 ## Install
 
-Add this line in your Gemfile:
-```
-gem 'abilities'
+Put this line in your Gemfile:
+```ruby
+gem 'chi-authorization'
 ```
 
 Then bundle:
@@ -28,45 +27,39 @@ $ bundle
 
 ## Configuration
 
-Generate the definitions file:
+Generate the policies file:
 ```
-bundle exec rails g abilities:install
-```
-
-This will create two files.
-
-```
-config/initializers/abilities.rb
-config/abilities.rb
+bin/rails g chi:authorization:install
 ```
 
-Within config/initializers/abilities.rb set the user helper name that will be used in the controllers, in this case the user model:
+Set the user `helper_name` inisde the generated `intializers/authorization.rb`:
 ```ruby
-Abilities.configure do |config|
-  config.helper = :user
+Chi::Authorization.configure do |config|
+  config.helper_name = :current_user
 end
 ```
 
 ## Usage
 
-### Definitions
+### Policies
 
-The can and cannot methods are used to define the policies:
+Use `can` and `cannot` methods to define the policies inside the generated `config/authorization.rb`:
 ```ruby
-Abilities.define do
+Chi::Authorization.define do |current_user|
   can :view, :any
-  can :manage, User do |user|
-    user == self
+  can :manage, User, if: ->(user) {
+    user == current_user
+  }
+
+  scope unless: ->{ current_user.admin? } do
+    can :detroy, Product
   end
-  can :destroy, Product if admin?
 end
 ```
 
-NOTE: Methods besides can and cannot are sent to the current_user.
-
 ### Controllers
 
-With the authorize! method Abilities::AccessDenied is raised if authorization fails:
+Using `authorize!` method `Chi::Exceptions::AccessDenied` is raised if authorization fails:
 ```ruby
 class UsersController < ApplicationController
   def edit
@@ -76,7 +69,7 @@ class UsersController < ApplicationController
 end
 ```
 
-If you don't wish an exception to be raised, you may use the can? and cannot? helpers:
+If you don't want an exception to be raised use `can?` and `cannot?` instead:
 ```ruby
 class UsersController < ApplicationController
   def edit
@@ -92,9 +85,9 @@ end
 
 ### Views
 
-The helpers can? and cannot? are available in views as well:
+The helpers `can?` and `cannot?` are available in the controller views too:
 ```erb
-<% if can?(:destroy, @product) %>
+<% if can?(:detroy, @product) %>
   <%= link_to product_path(@product), method: 'delete' %>
 <% end %>
 ```
@@ -103,11 +96,13 @@ The helpers can? and cannot? are available in views as well:
 
 Any issue, pull request, comment of any kind is more than welcome!
 
-We will mainly ensure compatibility to Rails, AWS, PostgreSQL, Redis, Elasticsearch and FreeBSD.
-
 ## Credits
 
-This gem is maintained and funded by [museways](https://github.com/museways).
+This gem is funded and maintained by [mmontossi](https://github.com/mmontossi).
+
+With the sponsorship of:
+
+[![Occam Logo](https://www.occam.global/wp-content/uploads/2018/01/Occam_V1_170px.png)](https://www.occam.global)
 
 ## License
 

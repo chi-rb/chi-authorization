@@ -5,7 +5,7 @@ class PolicyTest < ActiveSupport::TestCase
   setup do
     @user = User.new
     @controller = ProductsController.new
-    @controller.user = @user
+    @controller.current_user = @user
     @product = Product.new
   end
 
@@ -13,7 +13,7 @@ class PolicyTest < ActiveSupport::TestCase
     assert_nothing_raised do
       @controller.send :authorize!, :create, @product
     end
-    assert_raises Abilities::AccessDenied do
+    assert_raises Chi::Authorization::Exceptions::AccessDenied do
       @controller.send :authorize!, :read, @product
     end
   end

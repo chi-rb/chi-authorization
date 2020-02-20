@@ -1,0 +1,42 @@
+{{ render node.service }}
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ name }}
+  labels:
+    name: {{ name }}
+spec:
+  replicas: {{ replicas }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      name: {{ name }}
+  template:
+    metadata:
+      labels:
+        name: {{ name }}
+    spec:
+      imagePullSecrets:
+      - name: docker
+      containers:
+      - image: {{ repo }}
+        name: {{ name }}
+        tty: true
+        stdin: true
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        env:
+        - name: RAILS_ENV
+          value: {{ app_env }}
+        - name: DB_HOST
+          value: {{ postgres_host }}
+        volumeMounts:
+        - mountPath: /rails
+          name: rails
+      volumes:
+      - name: rails
+        hostPath:
+          path: {{ app_path }}

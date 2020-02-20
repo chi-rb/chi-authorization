@@ -1,9 +1,11 @@
 .DS_Store
 .byebug_history
-.ruby-version
-.bundle/
 log/*.log
-pkg/
 test/dummy/db/schema.rb
 test/dummy/log/*.log
+
+.bundle/
+vendor/
+pkg/
+tmp/
 test/dummy/tmp/

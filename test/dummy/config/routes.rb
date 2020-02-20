@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'product' => 'products#show'
+  get 'product', to: 'products#show'
 
 end

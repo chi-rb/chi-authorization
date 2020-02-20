@@ -1,6 +1,6 @@
 require 'test_helper'
 require 'rails/generators'
-require 'generators/abilities/install/install_generator'
+require 'generators/chi/authorization/install/install_generator'
 
 class GeneratorsTest < Rails::Generators::TestCase
   destination Rails.root.join('tmp')
@@ -10,10 +10,10 @@ class GeneratorsTest < Rails::Generators::TestCase
   end
 
   test 'install' do
-    self.class.tests Abilities::Generators::InstallGenerator
+    self.class.tests Chi::Authorization::Generators::InstallGenerator
     run_generator
-    assert_file 'config/initializers/abilities.rb'
-    assert_file 'config/abilities.rb'
+    assert_file 'config/initializers/authorization.rb'
+    assert_file 'config/authorization.rb'
   end
 
 end

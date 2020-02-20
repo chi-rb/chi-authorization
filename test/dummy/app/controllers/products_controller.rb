@@ -1,9 +1,9 @@
 class ProductsController < ApplicationController
 
-  attr_accessor :user
+  attr_accessor :current_user
 
   def show
-    @user = User.new
+    @current_user = User.new
     @product = Product.new
   end
 

@@ -1,0 +1,9 @@
+strategy=Recreate
+replicas=1
+
+postgres_storage=1Gi
+postgres_user=postgres
+postgres_db=$app_env
+
+rails_pod_port=80
+rails_cluster_port=31003

@@ -1,0 +1,6 @@
+app_name=chi-authorization
+
+postgres_repo=postgres:12.1
+postgres_pod_port=5432
+
+rails_repo=mmontossi/dev:$app_env

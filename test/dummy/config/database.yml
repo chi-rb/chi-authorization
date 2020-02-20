@@ -1,10 +1,17 @@
-default: &default
+DEFAULTS: &DEFAULTS
   adapter: postgresql
-
+  port: 5432
+  username: postgres
+  host: <%= ENV['DB_HOST'] %>
+ 
 development:
-  <<: *default
-  database: abilities_development
+  <<: *DEFAULTS
+  database: development
 
 test:
-  <<: *default
-  database: abilities_test
+  <<: *DEFAULTS
+  database: test
+
+production:
+  <<: *DEFAULTS
+  database: production
