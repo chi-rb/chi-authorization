@@ -88,7 +88,7 @@ end
 The helpers `can?` and `cannot?` are available in the controller views too:
 ```erb
 <% if can?(:detroy, @product) %>
-  <%= link_to product_path(@product), method: 'delete' %>
+  <%= link_to product_path(@product), method: :delete %>
 <% end %>
 ```
 
