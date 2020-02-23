@@ -3,7 +3,8 @@ module Chi
     class Railtie < Rails::Railtie
 
       config.before_initialize do
-        load Rails.root.join('config/authorization.rb')
+        path = Rails.root.join('config/authorization.rb')
+        load path if File.exist?(path)
       end
 
       initializer 'chi.authorization.action_controller' do
