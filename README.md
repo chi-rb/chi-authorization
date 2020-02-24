@@ -75,7 +75,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     if can?(:edit, @user)
-      @user.update params
+      @user.update user_params
     else
       # handle access denied
     end
