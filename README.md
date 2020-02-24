@@ -75,7 +75,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     if can?(:edit, @user)
-      @user.update post_params
+      @user.update params
     else
       # handle access denied
     end
@@ -88,7 +88,7 @@ end
 The helpers `can?` and `cannot?` are available in the controller views too:
 ```erb
 <% if can?(:detroy, @product) %>
-  <%= link_to product_path(@product), method: :delete %>
+  <%= link_to @product, method: :delete %>
 <% end %>
 ```
 
